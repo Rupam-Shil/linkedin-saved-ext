@@ -1,0 +1,16 @@
+{
+	"manifest_version": 3,
+	"name": "Dress Sense",
+	"version": "1.0",
+	"description": "A Chrome extension for Dress Sense",
+	"action": {
+		"default_popup": "index.html",
+		"default_icon": {
+			"16": "vite.svg",
+			"48": "vite.svg",
+			"128": "vite.svg"
+		}
+	},
+	"permissions": ["storage"],
+	"host_permissions": ["<all_urls>"]
+}
