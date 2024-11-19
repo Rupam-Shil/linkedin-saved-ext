@@ -2,15 +2,14 @@
 	"manifest_version": 3,
 	"name": "Dress Sense",
 	"version": "1.0",
-	"description": "A Chrome extension for Dress Sense",
+	"description": "Dress Sense is a Chrome extension that helps you to dress better.",
 	"action": {
 		"default_popup": "index.html",
-		"default_icon": {
-			"16": "vite.svg",
-			"48": "vite.svg",
-			"128": "vite.svg"
-		}
+		"default_title": "Dress Sense"
 	},
-	"permissions": ["storage"],
-	"host_permissions": ["<all_urls>"]
+	"permissions": ["activeTab", "scripting"],
+	"host_permissions": ["<all_urls>"],
+	"background": {
+		"service_worker": "background.js"
+	}
 }

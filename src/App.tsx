@@ -1,12 +1,21 @@
-import React from 'react';
+function App() {
+	const handleAddImage = () => {
+		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+			if (tabs[0]?.id) {
+				// Send message with tab ID
+				chrome.runtime.sendMessage({
+					action: 'add_image',
+					tabId: tabs[0].id,
+				});
+			}
+		});
+	};
 
-const App: React.FC = () => {
 	return (
-		<div style={{ textAlign: 'center', padding: '20px' }}>
-			<h1>React Extension</h1>
-			<p>Built with React, Vite, and TypeScript!</p>
+		<div className="App">
+			<button onClick={handleAddImage}>Add Image</button>
 		</div>
 	);
-};
+}
 
 export default App;
