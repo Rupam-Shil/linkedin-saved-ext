@@ -7,12 +7,19 @@ const uploadImage = (imageData: string) => {
 
 const storeImageLocally = (imageData: string) => {
 	return new Promise((resolve, reject) => {
-		chrome.storage.local.set({ 'dress-sense-image': imageData }, () => {
-			if (chrome.runtime.lastError) {
-				reject(chrome.runtime.lastError);
-			} else {
-				resolve({ success: true, message: 'Image stored successfully' });
+		chrome.storage.local.get('dress-sense-image', (result) => {
+			const data = result['dress-sense-image'] || [];
+			if (data.length >= 5) {
+				data.shift();
 			}
+			data.push(imageData);
+			chrome.storage.local.set({ 'dress-sense-image': data }, () => {
+				if (chrome.runtime.lastError) {
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve({ success: true, message: 'Image stored successfully' });
+				}
+			});
 		});
 	});
 };

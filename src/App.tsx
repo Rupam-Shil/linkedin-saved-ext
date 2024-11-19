@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
+	const [imgList, setImgList] = useState<string[]>([]);
 
 	const sendBgMessage = (payload: Object) => {
 		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -23,12 +24,19 @@ function App() {
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = function (event) {
+				setImgList((prev) => [...prev, event.target!.result as string]);
 				sendBgMessage({ action: 'upload_image', imgUrl: event.target!.result });
 			};
 			reader.readAsDataURL(file);
 		}
 		inputRef.current!.value = '';
 	};
+
+	useEffect(() => {
+		chrome.storage.local.get('dress-sense-image', (result) => {
+			setImgList(result['dress-sense-image'] || []);
+		});
+	}, []);
 
 	return (
 		<div className="App">
@@ -40,6 +48,11 @@ function App() {
 				className="no-display"
 				onChange={handleImageUpload}
 			/>
+			<div className="flex wrap gap-1">
+				{imgList.map((img, index) => (
+					<img src={img} key={index} alt="Uploaded" className="preview-img" />
+				))}
+			</div>
 			<button onClick={() => inputRef.current?.click()}>Upload Image</button>
 			<button onClick={() => handleAction('remove_image')}>Remove Image</button>
 		</div>

@@ -1,3 +1,23 @@
 .no-display {
 	display: none;
 }
+.App {
+	width: min(90vw, 350px);
+}
+.flex {
+	display: flex;
+}
+
+.gap-1 {
+	gap: 1rem;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}
+
+.preview-img {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
