@@ -145,5 +145,11 @@ chrome.runtime.onMessage.addListener((message) => {
 				args: [message.imgUrl],
 			});
 		});
+	} else if (message.action === 'select_image') {
+		chrome.scripting.executeScript({
+			target: { tabId: message.tabId },
+			func: handleImageAdd,
+			args: [message.imgUrl],
+		});
 	}
 });

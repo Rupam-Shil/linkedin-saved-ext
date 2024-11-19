@@ -32,6 +32,10 @@ function App() {
 		inputRef.current!.value = '';
 	};
 
+	const handleSelectImage = (imgUrl: string) => {
+		sendBgMessage({ action: 'select_image', imgUrl });
+	};
+
 	useEffect(() => {
 		chrome.storage.local.get('dress-sense-image', (result) => {
 			setImgList(result['dress-sense-image'] || []);
@@ -50,7 +54,13 @@ function App() {
 			/>
 			<div className="flex wrap gap-1">
 				{imgList.map((img, index) => (
-					<img src={img} key={index} alt="Uploaded" className="preview-img" />
+					<img
+						src={img}
+						key={index}
+						alt="Uploaded"
+						onClick={() => handleSelectImage(img)}
+						className="preview-img"
+					/>
 				))}
 			</div>
 			<button onClick={() => inputRef.current?.click()}>Upload Image</button>
