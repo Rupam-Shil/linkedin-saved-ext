@@ -1,23 +1,11 @@
-.no-display {
-	display: none;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-.App {
-	width: min(90vw, 350px);
-}
-.flex {
-	display: flex;
-}
-
-.gap-1 {
-	gap: 1rem;
-}
-
-.wrap {
-	flex-wrap: wrap;
-}
-
-.preview-img {
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
+body {
+	font-family: 'Poppins', sans-serif;
 }
